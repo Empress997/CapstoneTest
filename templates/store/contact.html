@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="contact-area section-padding-100-0">
+    <div class="container py-5">
+        <hr>
+        <div class="row align-items-center justify-content-between">
+            <div class="col-12 col-lg-5">
+                <!-- Section Heading -->
+                <div class="section-heading">
+                    <h2>GET IN TOUCH</h2>
+                    <p>Send us a message, we will call back later</p>
+                </div>
+                <!-- Contact Form Area -->
+                <div class="contact-form-area mb-100">
+                    <form method="post" action="">
+                        <fieldset>
+                          {% csrf_token %}
+              
+                          {% for fm in form %}
+                              <div class="form-group">
+                                  {{fm.label_tag}}
+                                  {{fm}}
+                                  <small class="text-danger">{{fm.errors|striptags}}</small>
+                              </div>
+                          {% endfor %}
+                          <button class="btn btn-primary" type="submit">Submit</button>
+                        </fieldset>
+              
+                        {% if form.non_field_errors %}
+                          {% for error in non_field_errors %}
+                              <p class="alert alert-danger my-3">
+                                  {{error}}
+                              </p>
+                          {% endfor %}
+                        {% endif %}
+              
+                      </form>
+                      <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
